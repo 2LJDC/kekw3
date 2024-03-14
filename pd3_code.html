@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PD3 Codelist</title>
+  </head>
+  <body style="background-color: darkslategray; color: greenyellow">
+    <script>
+      let Zahl = [0, 0, 0, 0];
+
+      let codecounter = 1;
+
+      Zahl[0] = parseInt(prompt("Zahl 1: "));
+      Zahl[1] = parseInt(prompt("Zahl 2: "));
+      Zahl[2] = parseInt(prompt("Zahl 3: "));
+      Zahl[3] = parseInt(prompt("Zahl 4: "));
+
+      let rawcode = new Array(72);
+      const finalcode = new Array(72);
+
+      let tempcode;
+      let unique = true;
+
+      let finalcodecounter = 0;
+
+      //4-stelliger Code aus 3 bekannten Ziffern
+
+      //Kombination aller möglichen Elemente
+      if (Zahl[3] > 9) {
+        for (let x = 0; x < 3; x++) {
+          Zahl[3] = Zahl[x];
+          for (let i = 0; i < 4; i++) {
+            for (let a = 0; a < 4; a++) {
+              if (a != i) {
+                for (let b = 0; b < 4; b++) {
+                  if (b != i && b != a) {
+                    for (let c = 0; c < 4; c++) {
+                      if (c != i && c != a && c != b) {
+                        //document.write("Code Nummer " + codecounter++ + ": ");
+                        codecounter++;
+                        tempcode = "" + Zahl[i] + Zahl[a] + Zahl[b] + Zahl[c];
+                        //document.write(tempcode);
+                        rawcode[codecounter - 1] = tempcode;
+                        //document.write("<br>");
+                      }
+                    }
+                  }
+                }
+              }
+            }
+            //document.write("<br>");
+          }
+        }
+
+        //Aussortieren aller doppelten Codes und Ausgabe
+        for (let y = 0; y < 72; y++) {
+          for (let z = 0; z < 72; z++) {
+            if (rawcode[y] == finalcode[z]) {
+              unique = false;
+            }
+          }
+          if (unique == true) {
+            finalcode[finalcodecounter++] = rawcode[y];
+            document.write(
+              "Code Nummer: " +
+                finalcodecounter +
+                ": " +
+                finalcode[finalcodecounter - 1] +
+                "<br>"
+            );
+            //Absatz alle 6 Codes
+            if (finalcodecounter % 6 == 0) {
+              document.write("<br>");
+            }
+          }
+          unique = true;
+        }
+      }
+      //4-stelliger Code aus 4 bekannten Ziffern
+      else {
+        for (let i = 0; i < 4; i++) {
+          for (let a = 0; a < 4; a++) {
+            if (a != i) {
+              for (let b = 0; b < 4; b++) {
+                if (b != i && b != a) {
+                  for (let c = 0; c < 4; c++) {
+                    if (c != i && c != a && c != b) {
+                      document.write("Code Nummer " + codecounter++ + ": ");
+                      tempcode = "" + Zahl[i] + Zahl[a] + Zahl[b] + Zahl[c];
+                      document.write(tempcode);
+                      document.write("<br>");
+                    }
+                  }
+                }
+              }
+            }
+          }
+          document.write("<br>");
+        }
+      }
+    </script>
+  </body>
+</html>
